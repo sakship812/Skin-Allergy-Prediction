@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Generated files
+dashboard_data.json
+
+# Ignore all raw datasets
+data/*.csv
+
+# Keep only the deployment dataset
+!data/dashboard_data.csv
+
+# Other large/local data files
+*.xlsx
+*.xls
+*.parquet
+*.pkl
+*.joblib
