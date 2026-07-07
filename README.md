@@ -1,127 +1,175 @@
-# 🧴 Skincare Product Safety Prediction & Recommendation Engine
 
-A machine learning-powered recommendation system that helps users identify skincare products that are safer for their skin by combining **ingredient analysis**, **consumer review mining**, and **predictive modeling**.
+# 🧴 Skin Allergy Prediction & Recommendation Engine
 
-> Developed as a graduate group project for **MISM 6212 – Data Mining & Machine Learning** at Northeastern University.
+An end-to-end **Machine Learning & NLP** application that predicts skincare irritation risk and recommends safer skincare products based on ingredient composition, customer reviews, skin type, and allergen preferences.
 
-## Team
+> Built using **1M+ Sephora reviews**, ingredient analysis, TF-IDF, and multiple machine learning models, then deployed as an interactive Streamlit web application.
 
-- **Sakshi Patil**
-- **Harshmeet Kaur**
-- **Sai Athale**
-- **Shreya Pandey**
+## 🚀 Live Demo
 
----
+**🌐 Website:** https://skin-allergy-prediction.streamlit.app/
 
-## Project Overview
+## 📂 GitHub Repository
 
-Choosing skincare products can be difficult because ingredient labels are complex and reviews are subjective. Our goal was to build a recommendation engine that predicts irritation risk and recommends products based on a user's allergies and skin preferences.
-
-The system analyzes ingredients, identifies common allergens, learns patterns from more than **1 million Sephora reviews**, and assigns a safety score to products.
-
-Users can:
-- Select ingredients they are allergic to or want to avoid.
-- Filter products based on skin type and concerns.
-- View an overall safety/suitability score.
-- Compare products using ratings, prices, reviews, and predicted irritation risk.
+https://github.com/sakship812/Skin-Allergy-Prediction
 
 ---
 
-## Problem Statement
+## Project Highlights
 
-Consumers typically depend on marketing claims or anecdotal reviews when selecting skincare products. There is no scalable way to evaluate whether a product is likely to cause irritation for a specific user.
-
-Our project answers three questions:
-
-1. Can ingredient composition predict skin irritation?
-2. Can review text identify early signs of adverse reactions?
-3. Can we recommend safer skincare products based on allergies and ingredient preferences?
-
----
-
-## Datasets
-
-The project combines **three Kaggle datasets** into a unified pipeline.
-
-### 1. Sephora Product Dataset
-Contains approximately **8,000 skincare products** including:
-- Product name
-- Brand
-- Ingredients
-- Category
-- Price
-- Ratings
-
-### 2. Sephora Reviews Dataset
-Contains over **1.09 million customer reviews** including:
-- Review text
-- Ratings
-- Skin type
-- Recommendation status
-- Product IDs
-
-The reviews were distributed across multiple CSV files:
-- reviews_0-250.csv
-- reviews_250-500.csv
-- reviews_500-750.csv
-- reviews_750-1250.csv
-- reviews_1250-end.csv
-
-### 3. INCI Ingredients Dataset (ingredientsList.csv)
-
-A standardized ingredient reference containing cosmetic ingredient names used to:
-- Normalize ingredient names
-- Identify known allergenic ingredients
-- Flag potentially harmful ingredients
+- 🔬 Analyzed **1.09+ million Sephora reviews**
+- 🧴 Processed **8,000+ skincare products**
+- 🧠 Compared **6 Machine Learning models**
+- 📈 Achieved **ROC-AUC of 0.9917**
+- 💬 Used **TF-IDF + NLP** for review analysis
+- ⚠️ Detects ingredient allergens and irritation risk
+- 🎯 Personalized recommendations based on skin type & allergies
+- 🌐 Fully deployed as a **Streamlit web application**
 
 ---
 
-## Data Pipeline
+## Table of Contents
 
-Our workflow consisted of:
-
-1. Collecting all three datasets from Kaggle.
-2. Cleaning duplicate and missing records.
-3. Standardizing column names.
-4. Merging product information with customer reviews.
-5. Mapping ingredients against the INCI reference dataset.
-6. Engineering allergen and toxicity features.
-7. Creating irritation labels using review keywords.
-8. Training multiple machine learning models.
-9. Building an interactive Streamlit dashboard.
+- Overview
+- Features
+- Project Architecture
+- Project Structure
+- Datasets
+- Methodology
+- Machine Learning Models
+- Results
+- Technologies Used
+- Installation
+- Running the Application
+- Team
+- Future Improvements
+- Disclaimer
 
 ---
 
-## Feature Engineering
+# Overview
 
-We engineered several features including:
+Consumers often rely on marketing claims and scattered online reviews when selecting skincare products. Understanding ingredient labels and determining whether a product is suitable for a specific skin type can be difficult.
+
+This project addresses that problem by combining structured product information with over one million customer reviews to build a machine learning recommendation engine capable of:
+
+- Predicting irritation risk
+- Identifying potentially harmful ingredients
+- Filtering products based on allergies
+- Providing personalized skincare recommendations
+- Ranking products using a suitability score
+
+The application combines ingredient analysis, natural language processing, and predictive machine learning into an interactive web dashboard.
+
+---
+
+# Features
+
+- Personalized skincare recommendations
+- Ingredient-based allergen filtering
+- Skin type specific recommendations
+- Product category filtering
+- Price range filtering
+- Ingredient search
+- Safety/Suitability Score
+- Product ratings and review counts
+- Interactive Streamlit dashboard
+- Fast search and filtering
+
+---
+
+# Project Architecture
+
+```text
+                Kaggle Datasets
+                       │
+        ┌──────────────┴──────────────┐
+        │                             │
+ Product Information           Sephora Reviews
+        │                             │
+        └──────────────┬──────────────┘
+                       │
+             Data Cleaning & Merging
+                       │
+             Feature Engineering
+                       │
+        Ingredient Analysis + NLP (TF-IDF)
+                       │
+        Machine Learning Model Training
+                       │
+          Suitability Score Generation
+                       │
+        Interactive Streamlit Dashboard
+```
+
+---
+
+# Project Structure
+
+```text
+Skin-Allergy-Prediction/
+│
+├── app.py                         # Main Streamlit web application
+├── README.md
+├── requirements.txt
+├── Skin_allergy.pptx
+│
+├── data/
+│   └── dashboard_data.csv         # Processed deployment dataset
+│
+├── scripts/
+│   ├── ML_proj.py                 # Data preprocessing & EDA
+│   ├── Step_2_and_Step_3.py       # Feature engineering & ML models
+│   └── dashboard_data_prep.py     # Dashboard dataset generation
+│
+└── frontend/
+    └── skincare_dashboard.py      # Original dashboard implementation
+```
+
+---
+
+# Datasets
+
+This project combines three Kaggle datasets.
+
+| Dataset | Description |
+|----------|-------------|
+| **Sephora Product Dataset** | Product metadata including ingredients, brand, category, price and ratings |
+| **Sephora Reviews Dataset** | More than 1.09 million customer reviews with review text, ratings, recommendations and skin type |
+| **INCI Ingredient Dataset** | Standardized cosmetic ingredient reference used to identify allergenic ingredients |
+
+The review dataset consists of multiple CSV files that were merged into a single machine learning dataset during preprocessing.
+
+---
+
+# Methodology
+
+## 1. Data Cleaning
+
+- Removed duplicate records
+- Standardized column names
+- Handled missing values
+- Combined review datasets
+- Merged product and review information
+
+## 2. Feature Engineering
+
+Engineered features include:
 
 - Ingredient allergen flags
 - Toxicity score
 - Allergen count
 - Ingredient interaction features
 - TF-IDF review vectors
-- VADER sentiment scores
-- Skin-type encoding
-- Irritation labels generated from review text
-
-Common allergen families included:
-- Fragrance
-- Alcohol
-- Sulfates
-- Parabens
-- Essential oils
-- Retinol
-- Formaldehyde releasers
-- Phthalates
-- Mineral oil
-- Silicones
+- VADER sentiment analysis
+- Skin type encoding
+- Irritation labels extracted from review text
 
 ---
 
-## Machine Learning Models
+# Machine Learning Models
 
-We evaluated multiple supervised learning algorithms including:
+The following supervised learning algorithms were evaluated:
 
 - Logistic Regression
 - Linear SVM
@@ -130,83 +178,97 @@ We evaluated multiple supervised learning algorithms including:
 - XGBoost
 - LightGBM
 
-TF-IDF features extracted from review text significantly improved model performance over ingredient-only features.
+The final recommendation engine combines ingredient-based safety indicators with NLP features extracted from customer reviews.
 
 ---
 
-## Recommendation Engine
+# Results
 
-The final recommendation engine cross-references a user's selected allergies with product ingredients and combines this with predicted irritation risk to generate personalized recommendations.
-
-For every product, the dashboard displays:
-
-- Product name
-- Brand
-- Price
-- Average rating
-- Number of reviews
-- Irritation probability
-- Suitability score
-- Ingredient warnings
-- Skin-type-specific recommendations
-
-Suitability scores are calculated using a weighted combination of:
-- Safety (predicted irritation risk)
-- Product quality (ratings)
-- Consumer recommendation rate
+| Metric | Value |
+|--------|-------:|
+| Reviews Analyzed | **1.09M+** |
+| Products | **8,000+** |
+| Models Compared | **6** |
+| Best ROC-AUC | **0.9917** |
+| Best F1 Score | **97.7%** |
+| Dashboard Products | **2,122** |
 
 ---
 
-## Dashboard
+# Technologies Used
 
-The Streamlit dashboard allows users to:
-
-- Select skin type
-- Choose skin concerns
-- Filter products by category
-- Filter by price range
-- Avoid selected allergens
-- Search for desired ingredients
-- Browse personalized product recommendations
-
----
-
-## Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- XGBoost
-- LightGBM
-- TF-IDF
-- VADER Sentiment Analysis
-- Matplotlib
-- Seaborn
-- Streamlit
+| Category | Technologies |
+|-----------|--------------|
+| Language | Python |
+| Data Processing | Pandas, NumPy |
+| Machine Learning | Scikit-learn, XGBoost, LightGBM |
+| NLP | TF-IDF, VADER Sentiment Analysis |
+| Dashboard | Streamlit |
+| Visualization | Matplotlib, Seaborn |
 
 ---
 
-## Repository Structure
+# Installation
 
-```text
-ML_proj.py                  # Data cleaning and preprocessing
-Step_2_and_Step_3.py        # Feature engineering and ML models
-dashboard_data_prep.py      # Dashboard data generation
-skincare_dashboard.py       # Streamlit application
-README.md
+Clone the repository
+
+```bash
+git clone https://github.com/sakship812/Skin-Allergy-Prediction.git
+cd Skin-Allergy-Prediction
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-## Key Contributions
+# Running the Application
 
-This project demonstrates how structured ingredient data and unstructured customer reviews can be combined to build an explainable AI recommendation system for skincare safety.
+Launch the Streamlit application:
 
-The solution helps users make more informed purchasing decisions by identifying potentially irritating products while recommending safer alternatives tailored to their preferences.
+```bash
+streamlit run app.py
+```
+
+Or visit the deployed application:
+
+**https://skin-allergy-prediction.streamlit.app/**
 
 ---
 
-## Disclaimer
+# Team
 
-This project was developed for academic purposes. Predictions are based on historical product reviews and ingredient analysis and should not replace professional medical advice or dermatological consultation.
+Developed by:
+
+- **Sakshi Patil**
+- **Harshmeet Kaur**
+- **Sai Athale**
+- **Shreya Pandey**
+
+Graduate Project — MISM 6212: Data Mining & Machine Learning  
+D'Amore-McKim School of Business, Northeastern University
+
+---
+
+# Future Improvements
+
+- Deep Learning models
+- Personalized user profiles
+- Barcode scanner for skincare products
+- Product image search
+- Mobile application
+- Explainable AI recommendations
+- Cloud-hosted prediction API
+
+---
+
+# Disclaimer
+
+This project was developed for educational and research purposes. Predictions are generated using historical customer reviews and ingredient analysis and are intended to assist users in making informed skincare decisions. They should not be considered medical advice or a substitute for consultation with a qualified dermatologist.
+
+---
+
+## ⭐ If you found this project interesting, feel free to star the repository!
